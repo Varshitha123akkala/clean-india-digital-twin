@@ -4,6 +4,7 @@ import {
   Link,
   createRootRouteWithContext,
   useRouter,
+  useRouterState,
   HeadContent,
   Scripts,
 } from "@tanstack/react-router";
@@ -13,6 +14,7 @@ import appCss from "../styles.css?url";
 import { reportLovableError } from "../lib/lovable-error-reporting";
 import { Header } from "../components/Header";
 import { Footer } from "../components/Footer";
+import { Toaster } from "sonner";
 
 function NotFoundComponent() {
   return (
@@ -125,15 +127,17 @@ function RootShell({ children }: { children: ReactNode }) {
 
 function RootComponent() {
   const { queryClient } = Route.useRouteContext();
+  const location = useRouterState({ select: (s) => s.location });
 
   return (
     <QueryClientProvider client={queryClient}>
       <div className="min-h-screen flex flex-col font-[Inter,ui-sans-serif,system-ui]">
         <Header />
-        <main className="flex-1">
+        <main className="flex-1" key={location.key}>
           <Outlet />
         </main>
         <Footer />
+        <Toaster position="top-right" closeButton richColors />
       </div>
     </QueryClientProvider>
   );

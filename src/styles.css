@@ -145,5 +145,620 @@
   body {
     background-color: var(--color-background);
     color: var(--color-foreground);
+    overflow-x: hidden;
   }
 }
+
+/* Premium Service Cards Design System */
+.premium-services-grid {
+  display: grid;
+  grid-template-columns: repeat(1, minmax(0, 1fr));
+  column-gap: 24px; /* Gap between cards */
+  row-gap: 32px;    /* Gap between rows */
+}
+
+@media (min-width: 640px) {
+  .premium-services-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (min-width: 1024px) {
+  .premium-services-grid {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+}
+
+.premium-service-card {
+  position: relative;
+  background-color: #ffffff;
+  border: 1px solid rgba(76, 175, 80, 0.12);
+  border-radius: 24px;
+  padding: 24px;
+  min-height: 230px; /* Forces consistent dimensions and horizontal layout */
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.08);
+  overflow: hidden;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  text-align: left;
+  transition: transform 500ms cubic-bezier(0.4, 0, 0.2, 1),
+              box-shadow 500ms cubic-bezier(0.4, 0, 0.2, 1),
+              border-color 500ms cubic-bezier(0.4, 0, 0.2, 1);
+  will-change: transform;
+  transform: translateZ(0); /* GPU acceleration */
+  backface-visibility: hidden;
+  cursor: pointer;
+}
+
+/* Green overlay layer using ::after */
+.premium-service-card::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(76, 175, 80, 0.15); /* Light green hover overlay */
+  transform: translateY(-100%);
+  transition: transform 500ms cubic-bezier(0.4, 0, 0.2, 1);
+  z-index: 0;
+  pointer-events: none;
+  will-change: transform;
+}
+
+/* On hover of card */
+.premium-service-card:hover {
+  transform: translateY(-12px) scale(1.02);
+  box-shadow: 0 25px 60px rgba(76, 175, 80, 0.18); /* Stronger shadow */
+  border-color: rgba(129, 199, 132, 0.4); /* Nature-inspired secondary green #81C784 highlight */
+}
+
+.premium-service-card:hover::after {
+  transform: translateY(0);
+}
+
+/* Icon Container */
+.premium-service-card-icon-wrap {
+  width: 44px;
+  height: 44px;
+  border-radius: 10px;
+  background-color: rgba(76, 175, 80, 0.10); /* Light green background */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 10px; /* Reduced to minimize internal card spacing */
+  position: relative;
+  z-index: 1;
+  color: #4CAF50; /* Brand green */
+  transition: transform 300ms cubic-bezier(0.4, 0, 0.2, 1),
+              background-color 300ms cubic-bezier(0.4, 0, 0.2, 1),
+              border-radius 300ms cubic-bezier(0.4, 0, 0.2, 1),
+              color 300ms cubic-bezier(0.4, 0, 0.2, 1);
+  will-change: transform, background-color, border-radius;
+}
+
+.premium-service-card-icon-wrap svg {
+  width: 20px !important;
+  height: 20px !important;
+  stroke-width: 2px !important;
+  transition: stroke 300ms cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.premium-service-card:hover .premium-service-card-icon-wrap {
+  transform: translateY(-4px) translateZ(0);
+  background-color: #14532D; /* Dark green circular background */
+  border-radius: 50%;
+  color: #ffffff; /* Icon becomes white */
+}
+
+/* Typography Title */
+.premium-service-card-title {
+  font-size: 15px;
+  font-weight: 700;
+  color: #0F172A;
+  margin: 0 0 4px 0; /* Reduced to minimize title-to-description space */
+  line-height: 1.3;
+  position: relative;
+  z-index: 1;
+  transition: color 300ms cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.premium-service-card:hover .premium-service-card-title {
+  color: #14532D; /* Title becomes dark green */
+}
+
+/* Typography Description */
+.premium-service-card-desc {
+  font-size: 11.5px;
+  line-height: 1.5;
+  color: #64748B;
+  margin: 0;
+  position: relative;
+  z-index: 1;
+  transition: color 300ms cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.premium-service-card:hover .premium-service-card-desc {
+  color: #1E293B; /* Description becomes slightly darker */
+}
+
+
+
+.premium-hero-feature-cards {
+  margin-top: 20px; /* Pulls cards down to prevent overlap and create a professional gap */
+  position: relative;
+  z-index: 30;
+}
+
+@media (max-width: 1023px) {
+  .premium-hero-feature-cards {
+    margin-top: 24px;
+  }
+}
+
+/* Premium 3-column grid for Objectives */
+.premium-objectives-grid {
+  display: grid;
+  grid-template-columns: repeat(1, minmax(0, 1fr));
+  column-gap: 24px;
+  row-gap: 32px;
+}
+
+@media (min-width: 640px) {
+  .premium-objectives-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (min-width: 1024px) {
+  .premium-objectives-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+
+/* Premium Staggered Services Grid Section */
+.premium-services-section {
+  background-color: #F8FCF7; /* Clean, light greenish-white background */
+  background-image: 
+    radial-gradient(circle at 10% 10%, rgba(76, 175, 80, 0.04) 0%, transparent 40%),
+    radial-gradient(circle at 90% 80%, rgba(76, 175, 80, 0.04) 0%, transparent 40%);
+  position: relative;
+  overflow: hidden;
+}
+
+.premium-services-staggered-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr)); /* 3 columns per row on mobile */
+  column-gap: 8px; /* Compact horizontal gap for mobile */
+  row-gap: 10px;   /* Compact vertical gap for mobile */
+  position: relative;
+  z-index: 10;
+}
+
+@media (min-width: 640px) {
+  .premium-services-staggered-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr)); /* Keep 3 columns on tablet */
+    column-gap: 12px;
+    row-gap: 14px;
+  }
+}
+
+@media (min-width: 768px) {
+  .premium-services-staggered-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    column-gap: 14px;
+    row-gap: 16px;
+  }
+}
+
+@media (min-width: 1024px) {
+  .premium-services-staggered-grid {
+    grid-template-columns: repeat(4, minmax(0, 1fr)); /* Compact 4-column grid on desktop */
+    column-gap: 18px;
+    row-gap: 20px;
+    padding-bottom: 24px;
+  }
+}
+
+.premium-service-card {
+  position: relative;
+  background-color: #ffffff;
+  border: 1px solid rgba(76, 175, 80, 0.12);
+  border-radius: 16px;
+  padding: 16px;
+  min-height: 170px;
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.08);
+  overflow: hidden;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  text-align: left;
+  cursor: pointer;
+  
+  /* Staggered enter state properties */
+  opacity: 0;
+  transform: scale(0.9) translateY(40px) rotate(4deg);
+  transition: opacity 850ms cubic-bezier(0.22, 1, 0.36, 1),
+              transform 850ms cubic-bezier(0.22, 1, 0.36, 1),
+              box-shadow 500ms cubic-bezier(0.4, 0, 0.2, 1),
+              border-color 500ms cubic-bezier(0.4, 0, 0.2, 1);
+  will-change: opacity, transform;
+  transform-origin: center center;
+  backface-visibility: hidden;
+}
+
+/* Mobile-specific attractive card adjustments (max-width: 639px) */
+@media (max-width: 639px) {
+  .premium-service-card {
+    padding: 8px;
+    border-radius: 10px;
+    min-height: 110px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+  }
+  
+  .premium-service-card-icon-wrap {
+    width: 28px !important;
+    height: 28px !important;
+    border-radius: 6px !important;
+    margin-bottom: 6px !important;
+  }
+  
+  .premium-service-card-icon-wrap svg {
+    width: 14px !important;
+    height: 14px !important;
+  }
+
+  .premium-service-card-title {
+    font-size: 10.5px !important;
+    font-weight: 700 !important;
+    margin-bottom: 2px !important;
+    line-height: 1.2 !important;
+  }
+
+  .premium-service-card-desc {
+    font-size: 9px !important;
+    line-height: 1.3 !important;
+  }
+
+  .premium-service-card-line {
+    width: 16px !important;
+    height: 1.5px !important;
+    margin-top: 6px !important;
+  }
+}
+
+/* Green overlay layer using ::after */
+.premium-service-card::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(76, 175, 80, 0.15); /* Light green hover overlay */
+  transform: translateY(-100%);
+  transition: transform 500ms cubic-bezier(0.4, 0, 0.2, 1);
+  z-index: 0;
+  pointer-events: none;
+  will-change: transform;
+}
+
+/* Card Number Overlay */
+.premium-service-card-number {
+  position: absolute;
+  right: 16px;
+  top: 10px;
+  font-size: 38px;
+  font-weight: 800;
+  color: rgba(76, 175, 80, 0.08);
+  line-height: 1;
+  font-family: system-ui, -apple-system, sans-serif;
+  transition: color 300ms cubic-bezier(0.4, 0, 0.2, 1);
+  pointer-events: none;
+  z-index: 1;
+}
+
+.premium-service-card:hover .premium-service-card-number {
+  color: rgba(76, 175, 80, 0.2);
+}
+
+/* Thick Bottom accent line */
+.premium-service-card-line {
+  width: 24px;
+  height: 2.5px;
+  background-color: #4CAF50;
+  border-radius: 2px;
+  margin-top: 12px;
+  position: relative;
+  z-index: 1;
+  transition: background-color 300ms cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.premium-service-card:hover .premium-service-card-line {
+  background-color: #14532D;
+}
+
+/* Animations active state - Desktop staggered wave */
+@media (min-width: 1024px) {
+  /* Subtle wave offset pattern: Col 1 & 3 offset up (-4px / -6px), Col 2 & 4 offset down (6px / 4px) to reduce vertical gaps */
+  .is-visible .staggered-card-0 { opacity: 1; transform: translateY(-4px) scale(1) rotate(-1.5deg); transition-delay: 0ms; }
+  .is-visible .staggered-card-1 { opacity: 1; transform: translateY(6px) scale(1) rotate(1deg); transition-delay: 130ms; }
+  .is-visible .staggered-card-2 { opacity: 1; transform: translateY(-6px) scale(1) rotate(-2deg); transition-delay: 260ms; }
+  .is-visible .staggered-card-3 { opacity: 1; transform: translateY(4px) scale(1) rotate(1.5deg); transition-delay: 390ms; }
+  .is-visible .staggered-card-4 { opacity: 1; transform: translateY(-4px) scale(1) rotate(1deg); transition-delay: 520ms; }
+  .is-visible .staggered-card-5 { opacity: 1; transform: translateY(6px) scale(1) rotate(-1deg); transition-delay: 650ms; }
+  .is-visible .staggered-card-6 { opacity: 1; transform: translateY(-6px) scale(1) rotate(1.5deg); transition-delay: 780ms; }
+  .is-visible .staggered-card-7 { opacity: 1; transform: translateY(4px) scale(1) rotate(-1.5deg); transition-delay: 910ms; }
+
+  .is-visible .premium-service-card:hover {
+    transform: translateY(-12px) scale(1.05) rotate(0deg) !important;
+    box-shadow: 0 25px 60px rgba(76, 175, 80, 0.18);
+    border-color: rgba(129, 199, 132, 0.4);
+    transition-delay: 0ms !important;
+  }
+}
+
+/* Animations active state - Mobile/Tablet clean stack */
+@media (max-width: 1023px) {
+  .is-visible .staggered-card-0 { opacity: 1; transform: translateY(0) scale(1) rotate(0deg); transition-delay: 0ms; }
+  .is-visible .staggered-card-1 { opacity: 1; transform: translateY(0) scale(1) rotate(0deg); transition-delay: 130ms; }
+  .is-visible .staggered-card-2 { opacity: 1; transform: translateY(0) scale(1) rotate(0deg); transition-delay: 260ms; }
+  .is-visible .staggered-card-3 { opacity: 1; transform: translateY(0) scale(1) rotate(0deg); transition-delay: 390ms; }
+  .is-visible .staggered-card-4 { opacity: 1; transform: translateY(0) scale(1) rotate(0deg); transition-delay: 520ms; }
+  .is-visible .staggered-card-5 { opacity: 1; transform: translateY(0) scale(1) rotate(0deg); transition-delay: 650ms; }
+  .is-visible .staggered-card-6 { opacity: 1; transform: translateY(0) scale(1) rotate(0deg); transition-delay: 780ms; }
+  .is-visible .staggered-card-7 { opacity: 1; transform: translateY(0) scale(1) rotate(0deg); transition-delay: 910ms; }
+}
+
+/* Objectives Wheel Layout for Desktop */
+.objectives-wheel-section {
+  display: none; /* Hidden by default, shown on desktop */
+}
+
+.objectives-grid-section {
+  display: block;
+}
+
+@media (min-width: 1024px) {
+  .objectives-grid-section {
+    display: none; /* Hide standard grid on desktop */
+  }
+  .objectives-wheel-section {
+    display: block;
+    position: relative;
+  }
+
+  .wheel-container {
+    position: relative;
+    width: 100%;
+    max-width: 540px;
+    aspect-ratio: 1 / 1;
+    margin: 30px auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .wheel-border {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 72%;
+    height: 72%;
+    border-radius: 50%;
+    border: 2px dashed rgba(76, 175, 80, 0.25);
+    pointer-events: none;
+    z-index: 1;
+  }
+
+  /* Connecting lines from center to nodes */
+  .wheel-spoke {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    height: 2px;
+    background: linear-gradient(90deg, rgba(76, 175, 80, 0.25) 0%, rgba(76, 175, 80, 0.03) 100%);
+    transform-origin: left center;
+    z-index: 1;
+    pointer-events: none;
+  }
+
+  .wheel-center-ring {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 44%;
+    height: 44%;
+    border-radius: 50%;
+    border: 2px solid rgba(76, 175, 80, 0.12);
+    pointer-events: none;
+    z-index: 2;
+  }
+
+  .wheel-center {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 36%;
+    height: 36%;
+    border-radius: 50%;
+    background: #ffffff;
+    border: 1px solid rgba(76, 175, 80, 0.15);
+    box-shadow: 0 10px 40px rgba(76, 175, 80, 0.08), inset 0 0 20px rgba(76, 175, 80, 0.03);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    z-index: 10;
+  }
+
+  .wheel-node-wrapper {
+    position: absolute;
+    width: 15%;
+    height: 15%;
+    transform: translate(-50%, -50%);
+    z-index: 5;
+  }
+
+  .wheel-node {
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    background: #ffffff;
+    border: 2px solid rgba(76, 175, 80, 0.18);
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    position: relative;
+    z-index: 6;
+    transition: transform 400ms cubic-bezier(0.25, 1, 0.5, 1),
+                border-color 400ms cubic-bezier(0.25, 1, 0.5, 1),
+                box-shadow 400ms cubic-bezier(0.25, 1, 0.5, 1);
+  }
+
+  /* Node Hover Outer Ring */
+  .wheel-node::before {
+    content: "";
+    position: absolute;
+    top: -6px;
+    left: -6px;
+    right: -6px;
+    bottom: -6px;
+    border-radius: 50%;
+    border: 1.5px solid rgba(76, 175, 80, 0);
+    transition: border-color 300ms ease, transform 300ms ease;
+  }
+
+  .wheel-node-wrapper:hover .wheel-node {
+    border-color: #4CAF50;
+    box-shadow: 0 8px 30px rgba(76, 175, 80, 0.22);
+    transform: scale(1.1);
+  }
+
+  .wheel-node-wrapper:hover .wheel-node::before {
+    border-color: rgba(76, 175, 80, 0.3);
+    transform: scale(1.05);
+  }
+
+  .wheel-node svg {
+    width: 24px;
+    height: 24px;
+    color: #4CAF50;
+    transition: transform 300ms ease, color 300ms ease;
+  }
+
+  .wheel-node-wrapper:hover svg {
+    transform: scale(1.15);
+    color: #14532D;
+  }
+
+  .wheel-text-block {
+    position: absolute;
+    width: 220px;
+    top: 50%;
+    transform: translateY(-50%);
+    pointer-events: auto;
+  }
+
+  .wheel-text-right {
+    left: 120%;
+    text-align: left;
+  }
+
+  .wheel-text-left {
+    right: 120%;
+    text-align: right;
+  }
+
+  .wheel-text-title {
+    font-size: 15px;
+    font-weight: 700;
+    color: #0F172A;
+    margin-bottom: 4px;
+    transition: color 300ms ease;
+  }
+
+  .wheel-node-wrapper:hover .wheel-text-title {
+    color: #4CAF50;
+  }
+
+  .wheel-text-desc {
+    font-size: 12px;
+    color: #64748B;
+    line-height: 1.5;
+  }
+}
+
+/* Greenery Nature Theme Spacings and Backgrounds */
+.objectives-page-container {
+  background: #ffffff;
+  position: relative;
+  overflow: hidden;
+}
+
+/* Floating greenery animations */
+@keyframes leafFloat {
+  0%, 100% {
+    transform: translateY(0) rotate(0deg);
+  }
+  50% {
+    transform: translateY(-12px) rotate(4deg);
+  }
+}
+
+@keyframes leafSway {
+  0%, 100% {
+    transform: translateY(0) rotate(0deg) scale(1);
+  }
+  50% {
+    transform: translateY(8px) rotate(-6deg) scale(1.02);
+  }
+}
+
+.floating-leaf-1 {
+  animation: leafFloat 10s ease-in-out infinite;
+}
+
+.floating-leaf-2 {
+  animation: leafSway 14s ease-in-out infinite;
+}
+
+.floating-leaf-3 {
+  animation: leafFloat 12s ease-in-out infinite;
+  animation-delay: 1.5s;
+}
+
+.floating-leaf-4 {
+  animation: leafSway 16s ease-in-out infinite;
+  animation-delay: 2.5s;
+}
+
+@keyframes leafEntrance {
+  0% {
+    transform: scale(0) rotate(-45deg);
+    opacity: 0;
+  }
+  70% {
+    transform: scale(1.1) rotate(6deg);
+  }
+  100% {
+    transform: scale(1) rotate(0deg);
+    opacity: 1;
+  }
+}
+
+
+
+
+
+
+
+

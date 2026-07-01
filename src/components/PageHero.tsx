@@ -1,7 +1,7 @@
 export function PageHero({ eyebrow, title, subtitle }: { eyebrow?: string; title: string; subtitle?: string }) {
   return (
     <section className="bg-[var(--section-muted)] border-b border-border">
-      <div className="mx-auto max-w-7xl px-6 py-16 text-center">
+      <div className="mx-auto max-w-7xl px-6 py-12 text-center">
         {eyebrow && (
           <div className="text-primary text-sm font-semibold uppercase tracking-wide mb-3">{eyebrow}</div>
         )}
