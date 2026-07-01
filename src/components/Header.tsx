@@ -1,6 +1,6 @@
 import { Link, useRouterState } from "@tanstack/react-router";
 import { Leaf, Menu, X } from "lucide-react";
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect, useRef, useCallback } from "react";
 import logoImg from "@/assets/logo.png";
 
 const nav = [
@@ -42,32 +42,44 @@ export function Header() {
       const containerEl = containerRef.current;
       const activeRect = activeEl.getBoundingClientRect();
       const containerRect = containerEl.getBoundingClientRect();
+      const newLeft = activeRect.left - containerRect.left;
+      const newWidth = activeRect.width;
 
-      setPillStyle({
-        left: activeRect.left - containerRect.left,
-        width: activeRect.width,
+      setPillStyle((prev) => {
+        if (Math.abs(prev.left - newLeft) < 0.2 && Math.abs(prev.width - newWidth) < 0.2) {
+          return prev;
+        }
+        return { left: newLeft, width: newWidth };
       });
     } else {
-      setPillStyle({ left: 0, width: 0 });
+      setPillStyle((prev) => {
+        if (prev.left === 0 && prev.width === 0) return prev;
+        return { left: 0, width: 0 };
+      });
     }
   };
 
-  // Callback ref to capture layout metrics on every render/mount cycle
-  const activeRefCallback = (node: HTMLAnchorElement | null) => {
+  // Callback ref wrapped in useCallback to keep its reference static
+  // This guarantees React will NOT invoke it repeatedly on ordinary renders, avoiding update loops
+  const activeRefCallback = useCallback((node: HTMLAnchorElement | null) => {
     if (node) {
       activeRef.current = node;
-      // Calculate immediately
       const containerEl = containerRef.current;
       if (containerEl) {
         const activeRect = node.getBoundingClientRect();
         const containerRect = containerEl.getBoundingClientRect();
-        setPillStyle({
-          left: activeRect.left - containerRect.left,
-          width: activeRect.width,
+        const newLeft = activeRect.left - containerRect.left;
+        const newWidth = activeRect.width;
+
+        setPillStyle((prev) => {
+          if (Math.abs(prev.left - newLeft) < 0.2 && Math.abs(prev.width - newWidth) < 0.2) {
+            return prev;
+          }
+          return { left: newLeft, width: newWidth };
         });
       }
     }
-  };
+  }, []);
 
   useEffect(() => {
     updatePill();
